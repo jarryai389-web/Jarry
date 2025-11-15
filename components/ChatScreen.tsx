@@ -12,6 +12,21 @@ const ChatScreen: React.FC = () => {
     useEffect(() => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages, isLoading]);
+    
+    // Add keyboard shortcut for voice mode toggle
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'V') {
+                e.preventDefault();
+                // This is where you would trigger the voice mode logic.
+                // For now, it's a placeholder.
+                console.log('Voice mode toggled!');
+                alert('Voice mode toggled (UI only)!');
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -25,8 +40,8 @@ const ChatScreen: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col h-full bg-[#1C1C1C] relative">
-            <div className="absolute top-0 left-0 w-full h-full bg-grid-[#6A4C32]/10 [mask-image:linear-gradient(to_bottom,white_50%,transparent_100%)]"></div>
+        <div className="flex flex-col h-full bg-[#0F1113] relative">
+            <div className="absolute top-0 left-0 w-full h-full bg-grid [mask-image:linear-gradient(to_bottom,white_50%,transparent_100%)]"></div>
             <div className="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 relative">
                 {messages.map((msg, index) => (
                     <MessageBubble key={msg.id} message={msg} />
@@ -35,7 +50,7 @@ const ChatScreen: React.FC = () => {
                 <div ref={chatEndRef} />
             </div>
 
-            <div className="p-4 md:p-8 sticky bottom-0 z-10">
+            <div className="p-4 md:px-8 md:pb-8 sticky bottom-0 z-10">
                 <form onSubmit={handleSubmit} className="relative">
                     <textarea
                         value={inputText}
@@ -46,9 +61,9 @@ const ChatScreen: React.FC = () => {
                                 handleSubmit(e);
                             }
                         }}
-                        placeholder="Ask JARRY anything..."
+                        placeholder="Ask JARRY anything... (Ctrl+Shift+V for voice)"
                         rows={1}
-                        className="w-full pl-14 pr-28 py-4 bg-[#2A2A2A]/70 backdrop-blur-md border border-[#6A4C32] rounded-2xl text-[#FEE9B2] placeholder-[#6A4C32] resize-none focus:outline-none focus:ring-2 focus:ring-[#FFCC66] transition-all duration-300"
+                        className="w-full pl-14 pr-28 py-4 bg-[#0B0C0D]/70 backdrop-blur-md border border-[#6A4C32] rounded-2xl text-[#FEE9B2] placeholder-[#6A4C32] resize-none focus:outline-none focus:ring-2 focus:ring-[#FFCC66] transition-all duration-300"
                     />
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 flex space-x-2">
                         <button type="button" title="Upload File (UI Only)">

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Canvas, Block, BlockType } from '../types';
 import { fetchCanvas, saveCanvas } from '../services/api';
@@ -11,16 +10,19 @@ const CanvasEditor: React.FC = () => {
     useEffect(() => {
         const loadCanvas = async () => {
             setIsLoading(true);
-            const data = await fetchCanvas('default-canvas');
+            // FIX: Provided both userId and canvasId to fetchCanvas as required by its definition.
+            const data = await fetchCanvas('mock-user-123', 'default-canvas');
             setCanvas(data);
             setIsLoading(false);
         };
         loadCanvas();
     }, []);
     
-    const updateBlock = (blockId: string, newContent: string) => {
+    const updateBlock = (blockId: string, updates: Partial<Omit<Block, 'id' | 'type'>>) => {
         if (!canvas) return;
-        const updatedBlocks = canvas.blocks.map(b => b.id === blockId ? { ...b, content: newContent } : b);
+        const updatedBlocks = canvas.blocks.map(b => 
+            b.id === blockId ? { ...b, ...updates } : b
+        );
         setCanvas({ ...canvas, blocks: updatedBlocks });
     };
 
@@ -60,7 +62,8 @@ const CanvasEditor: React.FC = () => {
                         className="text-4xl font-black bg-transparent border-none focus:outline-none focus:ring-0 text-[#FEE9B2]"
                     />
                     <div className="flex space-x-2">
-                        <button onClick={() => saveCanvas(canvas)} className="px-4 py-2 bg-[#FFCC66] text-[#1C1C1C] font-bold rounded-lg hover:bg-[#FFB74D] transition-all shadow-[0_0_10px_#FFCC66]/50">Save</button>
+                        {/* FIX: Provided all required arguments (userId, canvasId, payload) to saveCanvas. */}
+                        <button onClick={() => saveCanvas('mock-user-123', canvas.id, canvas)} className="px-4 py-2 bg-[#FFCC66] text-[#1C1C1C] font-bold rounded-lg hover:bg-[#FFB74D] transition-all shadow-[0_0_10px_#FFCC66]/50">Save</button>
                         <button className="px-4 py-2 bg-transparent border border-[#6A4C32] font-bold rounded-lg hover:bg-[#6A4C32]/50 transition-all">Export</button>
                     </div>
                 </div>

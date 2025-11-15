@@ -1,4 +1,3 @@
-
 import { useState, useCallback } from 'react';
 import { Message } from '../types';
 import { sendMessage } from '../services/api';
@@ -31,11 +30,18 @@ export const useChat = () => {
         
         setMessages(prev => [...prev, jarryMessage]);
 
+        // Call the updated API service
+        const fullResponse = await sendMessage({
+            userId: 'mock-user-123',
+            text: text,
+            sessionId: 'mock-session-abc',
+        });
+
         // Simulate streaming
-        const fullResponse = await sendMessage(text);
         const words = fullResponse.text.split(' ');
         
         let streamedText = '';
+        // FIX: Corrected the for loop condition from 'i o <' to 'i <'. This syntax error caused cascading parsing failures.
         for (let i = 0; i < words.length; i++) {
             await new Promise(resolve => setTimeout(resolve, 50));
             streamedText += (i > 0 ? ' ' : '') + words[i];

@@ -4,10 +4,10 @@ import React from 'react';
 const AboutScreen: React.FC = () => {
     return (
         <div className="p-8 md:p-12">
-            <div className="max-w-4xl mx-auto bg-[#2A2A2A]/40 border border-[#6A4C32]/30 rounded-xl p-8 md:p-12">
+            <div className="max-w-4xl mx-auto bg-[#0B0C0D]/40 border border-[#6A4C32]/30 rounded-xl p-8 md:p-12">
                 <div className="flex items-center space-x-4 mb-8">
                     <div className="w-16 h-16 rounded-full border-2 border-[#BB86FC] p-1 shadow-[0_0_20px_#BB86FC]">
-                         <svg className="w-full h-full text-[#D4A574]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 1.5a.5.5 0 01.5.5v2a.5.5 0 01-1 0v-2a.5.5 0 01.5-.5zM3.81 4.19a.5.5 0 01.707-.707l1.414 1.414a.5.5 0 11-.707.707L3.81 4.19zM2 12.5a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5zM20 12.5a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5zM18.07 4.19a.5.5 0 01.707.707l-1.414 1.414a.5.5 0 11-.707-.707l1.414-1.414zM12 20.5a.5.5 0 01.5.5v2a.5.5 0 01-1 0v-2a.5.5 0 01.5-.5zM3.81 18.07a.5.5 0 01.707-.707l1.414 1.414a.5.5 0 11-.707.707l-1.414-1.414zM18.07 18.07a.5.5 0 01.707.707l-1.414-1.414a.5.5 0 11-.707-.707l1.414 1.414zM12 6.5a6 6 0 100 12 6 6 0 000-12z"/></svg>
+                         <svg className="w-full h-full text-[#D4A574]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3.5 4.5a2 2 0 012-2h13a2 2 0 012 2v2.5a2 2 0 01-2 2h-4.5a0.5 0.5 0 00-.5.5v1a0.5 0.5 0 00.5.5h2a2 2 0 012 2v2.5a2 2 0 01-2 2h-13a2 2 0 01-2-2v-11z" /><path d="M15 15.5a2 2 0 002-2v-2.5" /><path d="M11 13.5v-2" /></svg>
                     </div>
                     <div>
                         <h1 className="text-4xl font-black text-[#FEE9B2]">About JARRY</h1>

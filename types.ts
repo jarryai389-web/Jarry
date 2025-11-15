@@ -1,6 +1,18 @@
 
 export type Page = 'chat' | 'canvas' | 'projects' | 'memory' | 'tools' | 'settings' | 'profile' | 'about';
 
+export interface User {
+  id: string;
+  username: string;
+  email: string;
+  avatarUrl: string;
+}
+
+export interface GroundingSource {
+    uri: string;
+    title: string;
+}
+
 export interface Message {
     id: string;
     text: string;
@@ -9,18 +21,13 @@ export interface Message {
     sources?: GroundingSource[];
 }
 
-export interface GroundingSource {
-    uri: string;
-    title: string;
-}
-
 export type BlockType = 'heading' | 'note' | 'code' | 'checklist';
 
 export interface Block {
     id: string;
     type: BlockType;
     content: string;
-    checked?: boolean; // for checklist
+    checked?: boolean;
 }
 
 export interface Canvas {
@@ -33,8 +40,22 @@ export interface Project {
     id: string;
     name: string;
     status: 'Active' | 'Draft' | 'Archived';
-    files: string[];
+    files: { id: string, name: string, type: string }[];
     notes: string;
     tasks: { id: string, text: string, completed: boolean }[];
     metadata: Record<string, string>;
+}
+
+export interface MemoryEntry {
+    id: string;
+    preview: string;
+    content: string;
+    tags: string[];
+    createdAt: string;
+}
+
+export interface ToolDefinition {
+    name: string;
+    description: string;
+    params: { name: string; type: string; description: string }[];
 }
